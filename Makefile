@@ -29,21 +29,26 @@ SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
 # Mac INTEL INCLUDE_PATHS!
 #INCLUDE_PATHS = -Iinclude -I/usr/local/include
 # Mac ARM INCLUDE_PATHS!
-INCLUDE_PATHS = -Llib -I/opt/homebrew/include
+#INCLUDE_PATHS = -Iinclude -I/opt/homebrew/include
 # Windows INCLUDE_PATHS!
 #INCLUDE_PATHS = -Iinclude -IC:/msys64/ucrt64/include
+#Fedora include paths 
+INCLUDE_PATHS = -Iinclude -I/usr/local/include -I/usr/include
+
 
 # BIBLIOTEKSFILER–kompilerad objektkod
 # Mac ARM LIBRARY_PATHS!
-LIBRARY_PATHS = -Llib -L/opt/homebrew/lib
+#LIBRARY_PATHS = -Llib -L/opt/homebrew/lib
 # Mac INTEL LIBRARY_PATHS!
 #LIBRARY_PATHS = -Llib -L/usr/local/lib
 # Windows LIBRARY_PATHS
 #LIBRARY_PATHS = -Llib -LC:/msys64/ucrt64/lib
+# Fedora library paths
+LIBRARY_PATHS = -Llib -L/usr/local/lib -L/usr/lib64
 
 # LÄNKNING - objekfiler som används vid länkning. Enklare program utan SDL behöver normalt inte några speciella länk-flaggor
 # Default LINKER_FLAGS 
-LINKER_FLAGS =
+#LINKER_FLAGS =
 
 # Windows default LINKER_FLAGS to enable std::print (C++23)
 #LINKER_FLAGS = -lstdc++exp
@@ -57,6 +62,9 @@ LINKER_FLAGS =
 #LINKER_FLAGS = -lmingw32 -lstdc++exp -lSDL3 -lSDL3_image -lSDL3_ttf
 # Windows LINKER_FLAGS, Om SDL2 används! 
 #LINKER_FLAGS = -lmingw32 -lstdc++exp -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
+
+#Fedora linker flags sdl3
+LINKER_FLAGS = -lSDL3 -lSDL3_image -lSDL3_ttf
 
 
 all:
