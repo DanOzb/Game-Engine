@@ -3,6 +3,11 @@
 
 #include <string>
 
+
+/**
+ * Constants header
+ */
+
 namespace constants
 {
     // Constants
