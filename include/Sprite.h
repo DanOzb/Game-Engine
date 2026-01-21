@@ -21,8 +21,9 @@ namespace engine {
             virtual void onKeyDown(const SDL_Event& event){}
             virtual void onKeyUp(const SDL_Event& event){}
 
-            //rect dimension setters
+            //rect setters
             void setRectDimensions(float w, float h){rect.w = w, rect.h = h;}
+            void setRectPosition(float x, float y){rect.x = x, rect.y = y;}
 
             Sprite(const Sprite& other) = delete;
             const Sprite& operator=(const Sprite& other) = delete;
