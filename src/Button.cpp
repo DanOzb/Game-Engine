@@ -8,8 +8,14 @@ namespace engine{
     Button::Button(float x, float y, float w, float h, std::string txt, Action doWhat): Label(x, y, w, h, txt), doIt(doWhat){}
 
     void Button::draw() const{
-        SDL_SetRenderDrawColor(eng.getRenderer(), 255, 192, 203, 255);
+        Uint8 r, g, b, a; 
+        SDL_GetRenderDrawColor(eng.getRenderer(), &r, &g, &b, &a);
+        if(down)
+            SDL_SetRenderDrawColor(eng.getRenderer(), 255, 0, 0, 255);
+        else
+            SDL_SetRenderDrawColor(eng.getRenderer(), 255, 192, 203, 255);
         SDL_RenderFillRect(eng.getRenderer(), &getRect()); 
+        SDL_SetRenderDrawColor(eng.getRenderer(), r, g, b, a);
         Label::draw();
     }
 
