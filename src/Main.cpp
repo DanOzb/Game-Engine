@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 #include "Button.h"
 #include "Label.h"
+#include "Figure.h"
 #include <memory>
 #include <iostream>
 
@@ -13,24 +14,42 @@
 using namespace engine;
 using namespace std;
 
-LabelPtr label; 
-int value = 0; 
-void func(string txt){
-	if(txt == "+")
-		++value; 
-	else 
-		--value;
-	label->setText(to_string(value));
-}
+class StaticFigure : public Figure {
+public:
+
+    StaticFigure():Figure("example.png", 300, 0){}
+};
+
+class Player : public Figure {
+public:
+
+    Player():Figure("example.png", 10, 0){}
+	void onKeyDown(const SDL_Event& event) override {
+        if (event.key.key == SDLK_W || event.key.key == SDLK_UP) {
+            setRectPosition(getRect().x, (getRect().y - 5));
+            cout << "Hero moved up to: " << getRect().x << ", " << getRect().y << endl;
+        } else if(event.key.key == SDLK_S || event.key.key == SDLK_DOWN){
+			setRectPosition(getRect().x, (getRect().y + 5));
+            cout << "Hero moved down to: " << getRect().x << ", " << getRect().y << endl;
+		}
+		else if(event.key.key == SDLK_A || event.key.key == SDLK_LEFT){
+			setRectPosition(getRect().x - 5, getRect().y);
+            cout << "Hero moved left to: " << getRect().x << ", " << getRect().y << endl;
+		}
+		else if(event.key.key == SDLK_D || event.key.key == SDLK_RIGHT){
+			setRectPosition(getRect().x + 5, getRect().y);
+            cout << "Hero moved right to: " << getRect().x << ", " << getRect().y << endl;
+		}
+    }
+};
+
 
 int main() {
-	SpritePtr c1 = Button::make(100, 100, 100, 75, "+", func);
-	SpritePtr c2 = Button::make(400, 100, 100, 75, "-", func);
-	label = Label::make(250, 100, 100, 75, "0");
+	auto figure1 = SpritePtr(new StaticFigure()); 
+	auto figure2 = SpritePtr(new Player());
 
-	eng.add(c1); 
-	eng.add(c2); 
-	eng.add(label);
+	eng.add(figure1); 
+	eng.add(figure2);
 
 	eng.run();
 	return 0; 
