@@ -1,0 +1,2 @@
+1. Add update method in engine class to check for collisions
+2. Update collision detection to notify each Sprite when a collision has happened
