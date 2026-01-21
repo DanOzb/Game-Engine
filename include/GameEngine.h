@@ -23,7 +23,9 @@ namespace engine{
             TTF_Font* getFont() const {return font; }
             void add(SpritePtr ptr);
             void run(); 
-
+            bool checkCollision(const Sprite& a, const Sprite& b){
+                return SDL_HasRectIntersectionFloat(&a.getRect(), &b.getRect());
+            }
         private: 
             SDL_Window* win; 
             SDL_Renderer* ren; 
