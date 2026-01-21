@@ -42,3 +42,7 @@
 
 # vscode
 .vscode/
+
+#windows specific
+Makefile
+MakefileWindows
