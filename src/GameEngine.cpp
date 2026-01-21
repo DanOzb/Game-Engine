@@ -39,6 +39,24 @@ namespace engine{
                     case SDL_EVENT_QUIT: 
                         running = false; 
                         break; 
+                    case SDL_EVENT_MOUSE_BUTTON_DOWN: 
+                        for(CompPtr comp : components)
+                            comp->onMouseDown(event); 
+                        break; 
+                    case SDL_EVENT_MOUSE_BUTTON_UP: 
+                        for(CompPtr comp : components)
+                            comp->onMouseUp(event); 
+                        break; 
+                    case SDL_EVENT_KEY_DOWN: 
+                        for(CompPtr comp : components){
+                            comp->onKeyDown(event); 
+                        }
+                        break; 
+                    case SDL_EVENT_KEY_UP:
+                        for(CompPtr comp : components){
+                            comp->onKeyUp(event); 
+                        }
+                        break; 
                 } //switch
 		    } //while event
 

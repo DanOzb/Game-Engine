@@ -46,3 +46,6 @@
 #windows specific
 Makefile
 MakefileWindows
+
+#build
+build/
