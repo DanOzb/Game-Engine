@@ -25,7 +25,7 @@ namespace engine{
         SDL_Quit(); 
     }
 
-    void GameEngine::add(CompPtr ptr){
+    void GameEngine::add(SpritePtr ptr){
         components.push_back(ptr);
     }
 
@@ -40,20 +40,20 @@ namespace engine{
                         running = false; 
                         break; 
                     case SDL_EVENT_MOUSE_BUTTON_DOWN: 
-                        for(CompPtr comp : components)
+                        for(SpritePtr comp : components)
                             comp->onMouseDown(event); 
                         break; 
                     case SDL_EVENT_MOUSE_BUTTON_UP: 
-                        for(CompPtr comp : components)
+                        for(SpritePtr comp : components)
                             comp->onMouseUp(event); 
                         break; 
                     case SDL_EVENT_KEY_DOWN: 
-                        for(CompPtr comp : components){
+                        for(SpritePtr comp : components){
                             comp->onKeyDown(event); 
                         }
                         break; 
                     case SDL_EVENT_KEY_UP:
-                        for(CompPtr comp : components){
+                        for(SpritePtr comp : components){
                             comp->onKeyUp(event); 
                         }
                         break; 
@@ -62,7 +62,7 @@ namespace engine{
 
             SDL_SetRenderDrawColor(ren, 50, 50, 50, 255);
 		    SDL_RenderClear(ren);
-            for(CompPtr comp : components) 
+            for(SpritePtr comp : components) 
                 comp->draw(); 
             
             SDL_RenderPresent(ren);

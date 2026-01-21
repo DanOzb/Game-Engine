@@ -24,8 +24,8 @@ void func(string txt){
 }
 
 int main() {
-	CompPtr c1 = Button::make(100, 100, 100, 75, "+", func);
-	CompPtr c2 = Button::make(400, 100, 100, 75, "-", func);
+	SpritePtr c1 = Button::make(100, 100, 100, 75, "+", func);
+	SpritePtr c2 = Button::make(400, 100, 100, 75, "-", func);
 	label = Label::make(250, 100, 100, 75, "0");
 
 	eng.add(c1); 

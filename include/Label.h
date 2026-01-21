@@ -1,18 +1,18 @@
 #pragma once
-#include "Component.h"
+#include "Sprite.h"
 #include <string>
 #include <memory>
 
 
 /**
- * Example child component inherited from base Component class 
+ * Label class for game gui
  */
 
 namespace engine {
     class Label;
     typedef std::shared_ptr<Label> LabelPtr; 
 
-    class Label : public Component{
+    class Label : public Sprite{
         public: 
             static LabelPtr make(float x, float y, float w, float h, std::string txt); 
             void draw() const; 

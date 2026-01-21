@@ -1,15 +1,38 @@
 #pragma once
-#include "Component.h"
 
-  namespace engine {
+#include <memory>
+#include <SDL3/SDL.h>
 
-  class Sprite : public Component {
-  public:
-      Sprite(float x, float y, float w, float h, SDL_Texture* tex);
-      ~Sprite();
-      void draw() const override;
 
-  private:
-      SDL_Texture* texture;
-  };
-  }
+/**
+ * Sprite abstract base class acting as node entity
+ */
+
+namespace engine {
+    
+    class Sprite{
+
+        public: 
+            virtual ~Sprite(){} 
+            virtual void draw() const = 0; //abstract 
+            const SDL_FRect& getRect() const {return rect; }
+            virtual void onMouseDown(const SDL_Event& event){}
+            virtual void onMouseUp(const SDL_Event& event){}
+            virtual void onKeyDown(const SDL_Event& event){}
+            virtual void onKeyUp(const SDL_Event& event){}
+
+            //rect dimension setters
+            void setRectDimensions(float w, float h){rect.w = w, rect.h = h;}
+
+            Sprite(const Sprite& other) = delete;
+            const Sprite& operator=(const Sprite& other) = delete;
+
+        protected: 
+            Sprite(float x, float y);
+
+        private: 
+            SDL_FRect rect; 
+    };
+    typedef std::shared_ptr<Sprite> SpritePtr; 
+
+}

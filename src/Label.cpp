@@ -8,9 +8,9 @@ namespace engine{
         return LabelPtr(new Label(x, y, w, h, txt));
     }
 
-    Label::Label(float x, float y, float w, float h, std::string txt):Component(x, y, w, h), text(txt){
+    Label::Label(float x, float y, float w, float h, std::string txt):Sprite(x, y), text(txt){
         setText(text);
-
+        setRectDimensions(w, h);
     }
     void Label::draw() const {
         SDL_RenderTexture(eng.getRenderer(), tex, NULL, &getRect()); 
