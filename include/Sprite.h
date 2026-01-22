@@ -20,6 +20,7 @@ namespace engine {
             virtual void onMouseUp(const SDL_Event& event){}
             virtual void onKeyDown(const SDL_Event& event){}
             virtual void onKeyUp(const SDL_Event& event){}
+            virtual void onCollision(Sprite& other){}
 
             //rect setters
             void setRectDimensions(float w, float h){rect.w = w, rect.h = h;}

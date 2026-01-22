@@ -28,6 +28,17 @@ namespace engine{
     void GameEngine::add(SpritePtr ptr){
         components.push_back(ptr);
     }
+    // check for collisions
+    void GameEngine::update(){
+        for(size_t i = 0; i < components.size(); i++){
+            for(size_t j = i + 1; j < components.size(); j++){
+                if(checkCollision(*components[i], *components[j])){
+                    components[i]->onCollision(*components[j]);
+                    components[j]->onCollision(*components[i]);
+                }
+            }
+        }
+    }
 
     void GameEngine::run(){
         bool running = true; 
@@ -59,6 +70,8 @@ namespace engine{
                         break; 
                 } //switch
 		    } //while event
+
+            update(); // check for collisions
 
             SDL_SetRenderDrawColor(ren, 50, 50, 50, 255);
 		    SDL_RenderClear(ren);
