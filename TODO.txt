@@ -1,2 +1,1 @@
-1. Add update method in engine class to check for collisions
-2. Update collision detection to notify each Sprite when a collision has happened
+1: maze needs to be split into h:16 and w: 16, because that's the only way to 'eat' a point. maze needs to be loaded in 224/16 = 14x14, and from that track which point gets eaten e.g: 0,0,0,0 gets eaten -> change maze to emptyMaze 0,0,0,0 etc. 
