@@ -21,6 +21,7 @@ namespace engine {
             virtual void onKeyDown(const SDL_Event& event){}
             virtual void onKeyUp(const SDL_Event& event){}
             virtual void onCollision(Sprite& other){}
+            virtual void tick(){}
 
             //rect setters
             void setRectDimensions(float w, float h){rect.w = w, rect.h = h;}

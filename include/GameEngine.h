@@ -22,12 +22,15 @@ namespace engine{
             SDL_Renderer* getRenderer() const {return ren; }; 
             TTF_Font* getFont() const {return font; }
             void add(SpritePtr ptr);
+            void remove(SpritePtr ptr);
             void run(); 
-            void update(); // check for collisions
             bool checkCollision(const Sprite& a, const Sprite& b){
                 return SDL_HasRectIntersectionFloat(&a.getRect(), &b.getRect());
             }
+            void tick();
+            bool borderCollision(const Sprite& sprite);
         private: 
+            void checkAllCollisions(); // check for collisions
             SDL_Window* win; 
             SDL_Renderer* ren; 
             TTF_Font* font; 

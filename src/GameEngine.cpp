@@ -13,6 +13,7 @@ namespace engine{
         SDL_Init(SDL_INIT_VIDEO);
         win = SDL_CreateWindow("Example gui", cnts::gScreenWidth, cnts::gScreenHeight, 0);
         ren = SDL_CreateRenderer(win, NULL);
+        SDL_SetRenderVSync(ren, 1);
         TTF_Init();
         font = TTF_OpenFont((cnts::gResPath + "fonts/ARIAL.TTF").c_str(), 24); 
     }
@@ -28,8 +29,25 @@ namespace engine{
     void GameEngine::add(SpritePtr ptr){
         components.push_back(ptr);
     }
+
+    void GameEngine::remove(SpritePtr ptr){
+        for(auto it = components.begin(); it != components.end();){
+            if(*it == ptr) {
+                components.erase(it);
+            } else {
+                ++it; 
+            }
+        }
+    }
+
+    void GameEngine::tick(){
+        for(size_t i = 0; i < components.size();  ++i){
+            components[i]->tick(); 
+        }
+    }
+
     // check for collisions
-    void GameEngine::update(){
+    void GameEngine::checkAllCollisions(){
         for(size_t i = 0; i < components.size(); i++){
             for(size_t j = i + 1; j < components.size(); j++){
                 if(checkCollision(*components[i], *components[j])){
@@ -38,6 +56,13 @@ namespace engine{
                 }
             }
         }
+    }
+
+    bool GameEngine::borderCollision(const Sprite& sprite){
+        return (sprite.getRect().x < 0) || 
+            (sprite.getRect().x + sprite.getRect().w > cnts::gScreenWidth) || 
+           (sprite.getRect().y < 0) || 
+           (sprite.getRect().y + sprite.getRect().h > cnts::gScreenHeight);
     }
 
     void GameEngine::run(){
@@ -71,7 +96,8 @@ namespace engine{
                 } //switch
 		    } //while event
 
-            update(); // check for collisions
+            tick();
+            checkAllCollisions(); 
 
             SDL_SetRenderDrawColor(ren, 50, 50, 50, 255);
 		    SDL_RenderClear(ren);
