@@ -49,3 +49,4 @@ MakefileWindows
 
 #build
 build/
+doc/
