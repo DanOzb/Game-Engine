@@ -40,12 +40,6 @@ namespace engine{
         }
     }
 
-    void GameEngine::tick(){
-        for(size_t i = 0; i < components.size();  ++i){
-            components[i]->tick(); 
-        }
-    }
-
     // check for collisions
     void GameEngine::checkAllCollisions(){
         for(size_t i = 0; i < components.size(); i++){
@@ -63,6 +57,16 @@ namespace engine{
             (sprite.getRect().x + sprite.getRect().w > cnts::gScreenWidth) || 
            (sprite.getRect().y < 0) || 
            (sprite.getRect().y + sprite.getRect().h > cnts::gScreenHeight);
+    }
+
+    void GameEngine::update() {
+        for(size_t i = 0; i < components.size(); ++i) {
+            components[i]->tick(); 
+        }
+
+        if (tick_func) {
+            tick_func();
+        }
     }
 
     void GameEngine::run(){
@@ -96,9 +100,11 @@ namespace engine{
                 } //switch
 		    } //while event
 
-            tick();
-            checkAllCollisions(); 
-
+            if(!paused){
+                update();
+                checkAllCollisions(); 
+            }
+            
             SDL_SetRenderDrawColor(ren, 50, 50, 50, 255);
 		    SDL_RenderClear(ren);
             for(SpritePtr comp : components) 
